@@ -1,0 +1,86 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.column-checkboxes {
+  margin: 16px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.table {
+  min-width: 1040px;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.thead {
+  color: var(--table-head);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.thead:hover {
+  cursor: pointer;
+}
+
+.tr {
+  background: var(--table-row);
+  height: 70px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.tr:hover {
+  cursor: pointer;
+  box-shadow: var(--table-row-shadow);
+}
+
+.td {
+  padding: 0 10px;
+}
+
+.green-text {
+  color: var(--status-green);
+}
+
+.red-text {
+  color: var(--status-red);
+}
+
+.pagination {
+  margin: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pagination button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+}
+
+.pagination button:hover {
+  cursor: pointer;
+}
