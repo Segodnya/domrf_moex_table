@@ -31,7 +31,9 @@ const DataTableCell: FC<DataTableCellProps> = ({ value, column }) => {
     }
   }
 
-  return <td className="td">{column === 'diff' ? <span className={cellClass}>{value}</span> : typeof formattedValue === 'number' ? formattedValue.toLocaleString() : formattedValue}</td>;
+  return (
+    <td className={`td td-${column}`}>{column === 'diff' ? <span className={cellClass}>{value}</span> : typeof formattedValue === 'number' ? formattedValue.toLocaleString() : formattedValue}</td>
+  );
 };
 
 export default DataTableCell;

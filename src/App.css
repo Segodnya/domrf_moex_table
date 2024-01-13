@@ -78,7 +78,7 @@
   padding: 0 10px;
 }
 
-.td:nth-child(1) {
+.td-code {
   color: #303972;
   font-family: Poppins;
   font-size: 18px;
@@ -87,7 +87,7 @@
   line-height: normal;
 }
 
-.td:nth-child(2) {
+.td-index {
   color: #4d44b5;
   font-family: Poppins;
   font-size: 18px;
@@ -96,11 +96,11 @@
   line-height: normal;
 }
 
-.td:nth-child(3),
-.td:nth-child(5),
-.td:nth-child(6),
-.td:nth-child(7),
-.td:nth-child(8) {
+.td-value,
+.td-open,
+.td-min,
+.td-max,
+.td-volume {
   color: #303972;
   font-family: Poppins;
   font-size: 14px;
@@ -118,7 +118,7 @@
   color: #ffffff;
 }
 
-.td:nth-child(9) {
+.td-date {
   color: #a098ae;
   font-family: Poppins;
   font-size: 14px;
