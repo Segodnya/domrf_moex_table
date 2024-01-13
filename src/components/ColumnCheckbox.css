@@ -1,0 +1,24 @@
+.checkbox {
+  box-sizing: border-box;
+  display: flex;
+  padding: 8px 24px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  border: 1px solid #4d44b5;
+  color: #4d44b5;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  background: transparent;
+}
+
+.checkbox--active {
+  background: #4d44b5;
+  color: #fff;
+}

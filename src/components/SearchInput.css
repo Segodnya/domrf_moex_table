@@ -1,0 +1,37 @@
+.search-field {
+  position: relative;
+}
+
+.search-icon {
+  display: block;
+  height: 32px;
+  position: absolute;
+  top: 14px;
+  left: 32px;
+}
+
+.input {
+  box-sizing: border-box;
+  display: flex;
+  width: 350px;
+  height: 60px;
+  padding: 0 32px 0 80px;
+  align-items: center;
+  border-radius: 40px;
+  background: #fff;
+  border: 1px solid transparent;
+  color: #4d44b5;
+}
+
+.input,
+.input::placeholder {
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input:placeholder {
+  color: #a098ae;
+}

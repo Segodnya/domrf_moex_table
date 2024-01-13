@@ -1,5 +1,7 @@
 import { type FC } from 'react';
 import { DataItem } from '../types/types';
+import classNames from 'classnames';
+import './ColumnCheckbox.css';
 
 interface ColumnCheckboxProps {
   columnName: keyof DataItem;
@@ -13,11 +15,12 @@ const ColumnCheckbox: FC<ColumnCheckboxProps> = ({ columnName, isVisible, onColu
     return null;
   }
 
+  const checkboxClasses = classNames('checkbox', { 'checkbox--active': isVisible });
+
   return (
-    <label className="label">
-      <input type="checkbox" checked={isVisible} onChange={() => onColumnVisibilityChange(columnName)} />
+    <button className={checkboxClasses} onClick={() => onColumnVisibilityChange(columnName)}>
       {columnName}
-    </label>
+    </button>
   );
 };
 

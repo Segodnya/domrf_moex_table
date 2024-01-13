@@ -4,6 +4,8 @@ import { sortData } from './utils/utils';
 import ColumnCheckbox from './components/ColumnCheckbox';
 import DataTableHeader from './components/DataTableHeader';
 import DataTableRow from './components/DataTableRow';
+import SearchInput from './components/SearchInput';
+import Pagination from './components/Pagination';
 import './App.css';
 
 const App = () => {
@@ -13,7 +15,8 @@ const App = () => {
   const [sortDirection, setSortDirection] = useState(SortDirection.Ascending);
   const [visibleColumns, setVisibleColumns] = useState<(keyof DataItem)[]>(['code', 'index', 'value', 'diff', 'open', 'min', 'max', 'volume', 'date']);
   const [initialVisibleColumns] = useState<(keyof DataItem)[]>(['code', 'index', 'value', 'diff', 'open', 'min', 'max', 'volume', 'date']);
-  const itemsPerPage = 10;
+  const [searchValue, setSearchValue] = useState('');
+  const itemsPerPage = 5;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,10 +51,13 @@ const App = () => {
       const columnIndex = initialVisibleColumns.indexOf(columnName);
       setVisibleColumns((prevState) => [...prevState.slice(0, columnIndex), columnName, ...prevState.slice(columnIndex)]);
     }
+
+    setCurrentPage(1);
   };
 
-  const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    setCurrentPage(1);
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -59,35 +65,60 @@ const App = () => {
 
   const sortedData = sortData(data, sortColumn, sortDirection);
 
-  const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
+  const filteredItems = sortedData.filter((item) => {
+    return item.index.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+  });
+
+  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className="table-container">
       <h2>Stock Market Data</h2>
       <div className="column-checkboxes">
+        <SearchInput value={searchValue} onChange={handleSearchInputChange} />
         {initialVisibleColumns.map((columnName) => (
           <ColumnCheckbox key={columnName} columnName={columnName} isVisible={visibleColumns.includes(columnName as keyof DataItem)} onColumnVisibilityChange={handleColumnVisibilityChange} />
         ))}
       </div>
-      <table className="data-table table">
-        <thead className="thead">
-          <DataTableHeader visibleColumns={visibleColumns} onColumnSort={handleColumnSort} />
-        </thead>
-        <tbody>
-          {currentItems.map((item) => (
-            <DataTableRow key={item.code} item={item} visibleColumns={visibleColumns} />
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
-          <button key={index} onClick={() => paginate(index + 1)}>
-            {index + 1}
-          </button>
-        ))}
-        <span>
-          Page {currentPage} of {Math.ceil(data.length / itemsPerPage)}
+      <div className="table-wrapper">
+        <table className="data-table table">
+          <thead className="thead">
+            <DataTableHeader visibleColumns={visibleColumns} sortColumn={sortColumn} onColumnSort={handleColumnSort} />
+          </thead>
+          <tbody>
+            {currentItems.map((item) => (
+              <DataTableRow key={item.code} item={item} visibleColumns={visibleColumns} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="pagination-container">
+        <span className="pagination-message">
+          Showing <span className="pagination-message_strong">{currentPage * itemsPerPage - (itemsPerPage - 1)}</span>-
+          <span className="pagination-message_strong">{currentPage * itemsPerPage > filteredItems.length ? filteredItems.length : currentPage * itemsPerPage} </span>
+          from <span className="pagination-message_strong">{filteredItems.length} </span>
+          data
         </span>
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} onPreviousPage={handlePreviousPage} onNextPage={handleNextPage} />
       </div>
     </div>
   );
