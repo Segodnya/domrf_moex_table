@@ -2,7 +2,7 @@
 
 This is a web application that displays stock market data in a table format. The application fetches data from a JSON file and allows the user to sort the data by column, customize the visibility of columns, and paginate through the data.
 
-![Screenshot 2024-01-13 at 12 56 56](https://github.com/Segodnya/domrf_moex_table/assets/75853148/c7ae43d1-6260-4d56-9aef-0bb1361c5dcd)
+![Screenshot 2024-01-13 at 14 01 21](https://github.com/Segodnya/domrf_moex_table/assets/75853148/0da5ecb2-c202-4702-84b5-504ecd9460e2)
 
 ## Github Pages
 
