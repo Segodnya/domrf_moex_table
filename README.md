@@ -39,6 +39,10 @@ The project structure is as follows:
 - `App.css`: Stylesheet for the entire application.
 - `App.tsx`: The main component that renders the application.
 
+## Design References
+
+https://www.figma.com/file/qchPjerQMFjun6U2yXKGQ5/WB-092-Akademi---School-Admission-Dashboard-(Community)
+
 ## Contributing
 
 Contributions to the project are welcome. Feel free to open issues and submit pull requests.
